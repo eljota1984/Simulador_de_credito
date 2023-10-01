@@ -21,61 +21,51 @@
         <h1 class="display-4 text-center p-3 mb-2">Simulador de crédito de consumo</h1>
         <div class="contenedores">
             <div class="contenedor">
-                <div class=" p-3 input-group mb-3">
-                    <span class=" input-group-text">Rut :</span>
-                    <input id="rut" type="text" class="form-control" aria-label="Sizing example input"
-                        aria-describedby="inputGroup-sizing-default" placeholder="12345678-9">
-                </div>
-                <div class="p-3 input-group mb-3  ">
-                    <span class="input-group-text" id="inputGroup-sizing-default">Nombre :</span>
-                    <input id="nombre" type="text" class="form-control" aria-label="Sizing example input"
-                        aria-describedby="inputGroup-sizing-default" placeholder="Juan Munoz">
-                </div>
-                <div class="p-3 input-group mb-3  ">
-                    <span class="input-group-text" id="inputGroup-sizing-default">Correo :</span>
-                    <input id="correo" type="text" class="form-control" aria-label="Sizing example input"
-                        aria-describedby="inputGroup-sizing-default" placeholder="juan.munoz@mail.com">
-                </div>
-                <div class="p-3 input-group mb-3  ">
-                    <span class="input-group-text" id="inputGroup-sizing-default">Renta :</span>
-                    <input id="renta" type="text" class="form-control" aria-label="Sizing example input"
-                        aria-describedby="inputGroup-sizing-default" placeholder="1.000.000">
-                </div>
-                <!-- <div class="form-check">
-            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-            <label class="form-check-label" for="flexRadioDefault1">
-                Crédito de consumo
-            </label>
-        </div>
-        <div class="form-check">
-            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-            <label class="form-check-label" for="flexRadioDefault1">
-                Crédito hipotecário
-            </label>
-        </div> -->
-                <div class="p-3 input-group mb-3  ">
-                    <span class="input-group-text" id="inputGroup-sizing-default">Cantidad de cuotas</span>
-                    <input id="cuotas" type="text" class="form-control" aria-label="Sizing example input"
-                        aria-describedby="inputGroup-sizing-default" placeholder="6 a 60 cuotas">
-                </div>
-                <div class="p-3 input-group mb-3  ">
-                    <span class="input-group-text" id="inputGroup-sizing-default">Dinero a solicitar :</span>
-                    <input id="dineroASolicitar" type="text" class="form-control" aria-label="Sizing example input"
-                        aria-describedby="inputGroup-sizing-default" placeholder="100.000 a 10.000.000">
-                </div>
+                <form id="miFormulario" class="card-body">
+                    <div class=" p-3 input-group mb-3">
+                        <span class=" input-group-text">Rut :</span>
+                        <input id="rut" type="text" class="form-control" aria-label="Sizing example input"
+                            aria-describedby="inputGroup-sizing-default" placeholder="12345678-9">
+                    </div>
+                    <div class="p-3 input-group mb-3  ">
+                        <span class="input-group-text" id="inputGroup-sizing-default">Nombre :</span>
+                        <input id="nombre" type="text" class="form-control" aria-label="Sizing example input"
+                            aria-describedby="inputGroup-sizing-default" placeholder="Juan Munoz">
+                    </div>
+                    <div class="p-3 input-group mb-3  ">
+                        <span class="input-group-text" id="inputGroup-sizing-default">Correo :</span>
+                        <input id="correo" type="text" class="form-control" aria-label="Sizing example input"
+                            aria-describedby="inputGroup-sizing-default" placeholder="juan.munoz@mail.com">
+                    </div>
+                    <div class="p-3 input-group mb-3  ">
+                        <span class="input-group-text" id="inputGroup-sizing-default">Renta :</span>
+                        <input id="renta" type="text" class="form-control" aria-label="Sizing example input"
+                            aria-describedby="inputGroup-sizing-default" placeholder="1.000.000">
+                    </div>
 
+                    <div class="p-3 input-group mb-3  ">
+                        <span class="input-group-text" id="inputGroup-sizing-default">Cantidad de cuotas</span>
+                        <input id="cuotas" type="text" class="form-control" aria-label="Sizing example input"
+                            aria-describedby="inputGroup-sizing-default" placeholder="6 a 60 cuotas">
+                    </div>
+                    <div class="p-3 input-group mb-3  ">
+                        <span class="input-group-text" id="inputGroup-sizing-default">Dinero a solicitar :</span>
+                        <input id="dineroASolicitar" type="text" class="form-control" aria-label="Sizing example input"
+                            aria-describedby="inputGroup-sizing-default" placeholder="100.000 a 10.000.000">
+                    </div>
+                </form>
                 <button id="btnPrincipal" class="btn btn-primary" type="button" data-bs-toggle="collapse"
                     data-bs-target="#multiCollapseExample2" aria-expanded="false"
                     aria-controls="multiCollapseExample2">Simular</button>
                 <div class="col">
                     <div class="collapse multi-collapse" id="multiCollapseExample2">
                         <div id="resultado" class="card card-body negro">
-                            
+
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="contenedor">
+            <div id="resultado2" class="contenedor">
 
             </div>
         </div>
