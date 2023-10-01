@@ -1,0 +1,22 @@
+.imagenPequena {
+    width: 6rem;
+}
+.contenedores {
+display: flex;
+gap: 0.5rem;
+margin: 1rem;
+
+}
+.contenedor{
+    padding: 1rem;
+    
+    flex-grow: 0;
+    flex-shrink: 1;
+    flex-basis: 100%;
+    border: 1px solid  #0d6efd;
+
+}
+
+.negro {
+    color:black;
+}
