@@ -73,7 +73,7 @@ const showCredito = () => {
         const valorCuotaMensual = Number(infoPersona.cuotaMensual);
         const opciones = { style: 'decimal', minimumFractionDigits: 2, maximumFractionDigits: 2 };
         const numeroFormateado = numero.toLocaleString('es-ES', opciones);
-        const numCuotasFormateado = numCuotas.toLocaleString('es-ES', opciones);
+        //const numCuotasFormateado = numCuotas.toLocaleString('es-ES', opciones);
         const valorCuotaMensualFormateado = valorCuotaMensual.toLocaleString('es-ES', opciones);
 
         div.innerHTML += `
@@ -82,7 +82,7 @@ const showCredito = () => {
                     <strong>Nombre</strong>: ${infoPersona.nombre} <br>
                     <strong>Rut :</strong>: ${infoPersona.rut} <br>
                     <strong>Dinero total a pagar: </strong>: ${numeroFormateado} <br>
-                    <strong>${numCuotasFormateado} cuotas de : </strong> ${valorCuotaMensualFormateado}  cada una. <br>
+                    <strong>${numCuotas} cuotas de : </strong> ${valorCuotaMensualFormateado}  cada una. <br>
                     <button href="#" class="btn btn-danger" id="${infoPersona.id}" name="delete">Borrar</button>
                 </div>
             </div>
@@ -139,13 +139,13 @@ const simularCredito = () => {
     const valorCuotaMensual = Number(infoPersona.cuotaMensual);
     const opciones = { style: 'decimal', minimumFractionDigits: 2, maximumFractionDigits: 2 };
     const numeroFormateado = numero.toLocaleString('es-ES', opciones);
-    const numCuotasFormateado = numCuotas.toLocaleString('es-ES', opciones);
+   // const numCuotasFormateado = numCuotas.toLocaleString('es-ES', opciones);
     const valorCuotaMensualFormateado = valorCuotaMensual.toLocaleString('es-ES', opciones);
 
     const resultado = document.getElementById("resultado");
     resultado.innerHTML = `
         <h1>Total a pagar: ${numeroFormateado}</h1>
-        <h2>Cuotas: ${numCuotasFormateado}</h2>
+        <h2>Cuotas: ${numCuotas}</h2>
         <h2>Valor Cuota mensual: ${valorCuotaMensualFormateado}</h2>
     `;
 
