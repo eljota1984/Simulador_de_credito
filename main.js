@@ -71,7 +71,7 @@ const showCredito = () => {
         const numero = Number(infoPersona.dineroFinalAPagar);
         const numCuotas = Number(infoPersona.cantidadCuotas);
         const valorCuotaMensual = Number(infoPersona.cuotaMensual);
-        const opciones = { style: 'decimal', minimumFractionDigits: 2, maximumFractionDigits: 2 };
+        const opciones = { style: 'decimal', minimumFractionDigits: 0, maximumFractionDigits: 0 };
         const numeroFormateado = numero.toLocaleString('es-ES', opciones);
         //const numCuotasFormateado = numCuotas.toLocaleString('es-ES', opciones);
         const valorCuotaMensualFormateado = valorCuotaMensual.toLocaleString('es-ES', opciones);
@@ -137,7 +137,7 @@ const simularCredito = () => {
     const numero = Number(infoPersona.dineroFinalAPagar);
     const numCuotas = Number(infoPersona.cantidadCuotas);
     const valorCuotaMensual = Number(infoPersona.cuotaMensual);
-    const opciones = { style: 'decimal', minimumFractionDigits: 2, maximumFractionDigits: 2 };
+    const opciones = { style: 'decimal', minimumFractionDigits: 0, maximumFractionDigits: 0};
     const numeroFormateado = numero.toLocaleString('es-ES', opciones);
    // const numCuotasFormateado = numCuotas.toLocaleString('es-ES', opciones);
     const valorCuotaMensualFormateado = valorCuotaMensual.toLocaleString('es-ES', opciones);
