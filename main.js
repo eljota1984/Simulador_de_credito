@@ -68,14 +68,22 @@ const showCredito = () => {
     resultado2.innerHTML = '';
 
     personas.forEach(infoPersona => {
+        const numero = Number(infoPersona.dineroFinalAPagar);
+        const numCuotas = Number(infoPersona.cantidadCuotas);
+        const valorCuotaMensual = Number(infoPersona.cuotaMensual);
+        const opciones = { style: 'decimal', minimumFractionDigits: 2, maximumFractionDigits: 2 };
+        const numeroFormateado = numero.toLocaleString('es-ES', opciones);
+        const numCuotasFormateado = numCuotas.toLocaleString('es-ES', opciones);
+        const valorCuotaMensualFormateado = valorCuotaMensual.toLocaleString('es-ES', opciones);
+
         div.innerHTML += `
             <div class="card text-center mb-4">
                 <div class="card-body">
                     <strong>Nombre</strong>: ${infoPersona.nombre} <br>
                     <strong>Rut :</strong>: ${infoPersona.rut} <br>
-                    <strong>Dinero total a pagar: </strong>: ${infoPersona.dineroFinalAPagar} <br>
-                    <strong>${infoPersona.cantidadCuotas} cuotas de : </strong> ${infoPersona.cuotaMensual}  cada una. <br>
-                    <button href="#" class="btn btn-warning" id="${infoPersona.id}" name="delete">Borrar</button>
+                    <strong>Dinero total a pagar: </strong>: ${numeroFormateado} <br>
+                    <strong>${numCuotasFormateado} cuotas de : </strong> ${valorCuotaMensualFormateado}  cada una. <br>
+                    <button href="#" class="btn btn-danger" id="${infoPersona.id}" name="delete">Borrar</button>
                 </div>
             </div>
         `;
@@ -86,7 +94,7 @@ const showCredito = () => {
             deleteCredito(id);
         });
     });
-    
+
     resultado2.appendChild(div);
 };
 
@@ -126,14 +134,22 @@ const simularCredito = () => {
 
     personas.push(infoPersona);
 
+    const numero = Number(infoPersona.dineroFinalAPagar);
+    const numCuotas = Number(infoPersona.cantidadCuotas);
+    const valorCuotaMensual = Number(infoPersona.cuotaMensual);
+    const opciones = { style: 'decimal', minimumFractionDigits: 2, maximumFractionDigits: 2 };
+    const numeroFormateado = numero.toLocaleString('es-ES', opciones);
+    const numCuotasFormateado = numCuotas.toLocaleString('es-ES', opciones);
+    const valorCuotaMensualFormateado = valorCuotaMensual.toLocaleString('es-ES', opciones);
+
     const resultado = document.getElementById("resultado");
     resultado.innerHTML = `
-        <h1>Total a pagar: ${infoPersona.dineroFinalAPagar}</h1>
-        <h2>Cuotas: ${infoPersona.cantidadCuotas}</h2>
-        <h2>Valor Cuota mensual: ${infoPersona.cuotaMensual}</h2>
+        <h1>Total a pagar: ${numeroFormateado}</h1>
+        <h2>Cuotas: ${numCuotasFormateado}</h2>
+        <h2>Valor Cuota mensual: ${valorCuotaMensualFormateado}</h2>
     `;
 
-   console.log(personas)
+
     saveCreditoStorage(personas);
 
 
