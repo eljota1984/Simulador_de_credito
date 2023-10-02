@@ -80,8 +80,8 @@ const showCredito = () => {
             <div class="card text-center mb-4">
                 <div class="card-body">
                     <strong>Nombre</strong>: ${infoPersona.nombre} <br>
-                    <strong>Rut :</strong>: ${infoPersona.rut} <br>
-                    <strong>Dinero total a pagar: </strong>: ${numeroFormateado} <br>
+                    <strong>Rut :</strong> ${infoPersona.rut} <br>
+                    <strong>Dinero total a pagar: </strong> ${numeroFormateado} <br>
                     <strong>${numCuotas} cuotas de : </strong> ${valorCuotaMensualFormateado}  cada una. <br>
                     <button href="#" class="btn btn-danger" id="${infoPersona.id}" name="delete">Borrar</button>
                 </div>
