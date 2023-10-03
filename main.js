@@ -8,11 +8,11 @@ function obtenerInteres(cuotasCliente) {
     let interes = 0;
 
     if (cuotas > 0 && cuotas <= 2) {
-        interes = 0.3;
+        interes = 1.3;
     } else if (cuotas > 2 && cuotas <= 4) {
-        interes = 0.5;
+        interes = 1.5;
     } else if (cuotas > 4 && cuotas <= 5) {
-        interes = 0.8;
+        interes = 1.8;
     }
 
     return interes;
@@ -21,7 +21,7 @@ function obtenerInteres(cuotasCliente) {
 function dineroConInteres(dinero, interes) {
     const decimales = 0;
     dinero = Number(dinero);
-    let dineroConInteres = dinero + (dinero * interes);
+    let dineroConInteres = dinero * interes;
     dineroConInteres = dineroConInteres.toFixed(decimales);
     return dineroConInteres;
 }
@@ -73,8 +73,7 @@ const showCredito = () => {
         const valorCuotaMensual = Number(infoPersona.cuotaMensual);
         const opciones = { style: 'decimal', minimumFractionDigits: 0, maximumFractionDigits: 0 };
         const numeroFormateado = numero.toLocaleString('es-ES', opciones);
-        //const numCuotasFormateado = numCuotas.toLocaleString('es-ES', opciones);
-        const valorCuotaMensualFormateado = valorCuotaMensual.toLocaleString('es-ES', opciones);
+       const valorCuotaMensualFormateado = valorCuotaMensual.toLocaleString('es-ES', opciones);
 
         div.innerHTML += `
             <div class="card text-center mb-4">
