@@ -68,12 +68,12 @@ const showCredito = () => {
     resultado2.innerHTML = '';
 
     personas.forEach(infoPersona => {
-        const numero = Number(infoPersona.dineroFinalAPagar);
-        const numCuotas = Number(infoPersona.cantidadCuotas);
-        const valorCuotaMensual = Number(infoPersona.cuotaMensual);
+        const numero = Number(infoPersona.dineroFinalAPagar) || 0;
+        const numCuotas = Number(infoPersona.cantidadCuotas) || 0;
+        const valorCuotaMensual = Number(infoPersona.cuotaMensual) || 0;
         const opciones = { style: 'decimal', minimumFractionDigits: 0, maximumFractionDigits: 0 };
-        const numeroFormateado = numero.toLocaleString('es-ES', opciones);
-       const valorCuotaMensualFormateado = valorCuotaMensual.toLocaleString('es-ES', opciones);
+        const numeroFormateado = numero.toLocaleString('es-ES', opciones) || 0;
+        const valorCuotaMensualFormateado = valorCuotaMensual.toLocaleString('es-ES', opciones) || 0;
 
         div.innerHTML += `
             <div class="card text-center mb-4">
@@ -127,20 +127,18 @@ const simularCredito = () => {
         dineroSolicitar: dineroASolicitar || "N/A",
     };
 
-    infoPersona.interes = obtenerInteres(infoPersona.cantidadCuotas);
-    infoPersona.dineroFinalAPagar = dineroConInteres(infoPersona.dineroSolicitar, infoPersona.interes);
-    infoPersona.cuotaMensual = cuotaMensual(infoPersona.dineroFinalAPagar, infoPersona.cantidadCuotas);
+    infoPersona.interes = obtenerInteres(infoPersona.cantidadCuotas) || 0;
+    infoPersona.dineroFinalAPagar = dineroConInteres(infoPersona.dineroSolicitar, infoPersona.interes) || 0;
+    infoPersona.cuotaMensual = cuotaMensual(infoPersona.dineroFinalAPagar, infoPersona.cantidadCuotas) || 0;
 
     personas.push(infoPersona);
 
-    const numero = Number(infoPersona.dineroFinalAPagar);
-    const numCuotas = Number(infoPersona.cantidadCuotas);
-    const valorCuotaMensual = Number(infoPersona.cuotaMensual);
-    const opciones = { style: 'decimal', minimumFractionDigits: 0, maximumFractionDigits: 0};
-    const numeroFormateado = numero.toLocaleString('es-ES', opciones);
-   // const numCuotasFormateado = numCuotas.toLocaleString('es-ES', opciones);
-    const valorCuotaMensualFormateado = valorCuotaMensual.toLocaleString('es-ES', opciones);
-
+    const numero = Number(infoPersona.dineroFinalAPagar) || 0;
+    const numCuotas = Number(infoPersona.cantidadCuotas) || 0;
+    const valorCuotaMensual = Number(infoPersona.cuotaMensual) || 0;
+    const opciones = { style: 'decimal', minimumFractionDigits: 0, maximumFractionDigits: 0 };
+    const numeroFormateado = numero.toLocaleString('es-ES', opciones) || 0;
+    const valorCuotaMensualFormateado = valorCuotaMensual.toLocaleString('es-ES', opciones) || 0;
     const resultado = document.getElementById("resultado");
     resultado.innerHTML = `
         <h1>Total a pagar: ${numeroFormateado}</h1>
