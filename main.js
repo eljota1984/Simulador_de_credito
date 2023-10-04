@@ -159,9 +159,11 @@ const simularCredito = () => {
             formulario.reset();
         } else {
             alert(" Debe ingresar datos válidos númericos válidos");
+            formulario.reset();
         }
     } else {
         alert(" Debe ingresar datos válidos");
+        formulario.reset();
     }
 };
 
