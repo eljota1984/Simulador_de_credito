@@ -11,7 +11,6 @@
 
 .contenedor {
     padding: 1rem;
-
     flex-grow: 0;
     flex-shrink: 1;
     flex-basis: 100%;
@@ -27,23 +26,24 @@
     padding: 1rem;
     margin-top: 1rem;
     margin-left: 1rem;
-}
-
-;
+};
 
 .piePagina {
-    padding: 2rem;
-    margin-top: 4rem;
+    display: flex;
     font-size: 24px;
+    gap: 0.5rem;
+    margin: 1rem;
 }
+
 .miInput {
     color: #000;
- }
- 
- .miInput::placeholder {
-     opacity: 0.5; 
- }
- 
+}
+
+.miInput::placeholder {
+    opacity: 0.5;
+}
+
+
 
 @media screen and (max-width: 600px) {
     .contenedores {
@@ -65,7 +65,7 @@
 }
 
 @media screen and (max-width: 600px) {
-   
+
     .btnSimular {
         padding: 1rem;
         margin-top: 1rem;
