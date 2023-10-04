@@ -36,6 +36,14 @@
     margin-top: 4rem;
     font-size: 24px;
 }
+.miInput {
+    color: #000;
+ }
+ 
+ .miInput::placeholder {
+     opacity: 0.5; 
+ }
+ 
 
 @media screen and (max-width: 600px) {
     .contenedores {
@@ -53,5 +61,16 @@
 
     }
 
+
+}
+
+@media screen and (max-width: 600px) {
+   
+    .btnSimular {
+        padding: 1rem;
+        margin-top: 1rem;
+        margin-left: 1rem;
+        margin-bottom: 1rem;
+    }
 
 }

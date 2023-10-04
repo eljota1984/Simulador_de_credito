@@ -117,41 +117,45 @@ const simularCredito = () => {
     const cuotas = document.getElementById("cuotas").value;
     const dineroASolicitar = document.getElementById("dineroASolicitar").value;
 
-    let infoPersona = {
-        id: getRandomId(),
-        rut: rut || "N/A",
-        nombre: nombre || "N/A",
-        correo: correo || "N/A",
-        renta: renta || "N/A",
-        cantidadCuotas: obtenerCuotas(cuotas),
-        dineroSolicitar: dineroASolicitar || "N/A",
-    };
+    if (!isNaN(cuotas) && !isNaN(dineroASolicitar)) {
+        let infoPersona = {
+            id: getRandomId(),
+            rut: rut || "N/A",
+            nombre: nombre || "N/A",
+            correo: correo || "N/A",
+            renta: renta || "N/A",
+            cantidadCuotas: obtenerCuotas(cuotas),
+            dineroSolicitar: dineroASolicitar || "N/A",
+        };
 
-    infoPersona.interes = obtenerInteres(infoPersona.cantidadCuotas) || 0;
-    infoPersona.dineroFinalAPagar = dineroConInteres(infoPersona.dineroSolicitar, infoPersona.interes) || 0;
-    infoPersona.cuotaMensual = cuotaMensual(infoPersona.dineroFinalAPagar, infoPersona.cantidadCuotas) || 0;
+        infoPersona.interes = obtenerInteres(infoPersona.cantidadCuotas) || 0;
+        infoPersona.dineroFinalAPagar = dineroConInteres(infoPersona.dineroSolicitar, infoPersona.interes) || 0;
+        infoPersona.cuotaMensual = cuotaMensual(infoPersona.dineroFinalAPagar, infoPersona.cantidadCuotas) || 0;
 
-    personas.push(infoPersona);
+        personas.push(infoPersona);
 
-    const numero = Number(infoPersona.dineroFinalAPagar) || 0;
-    const numCuotas = Number(infoPersona.cantidadCuotas) || 0;
-    const valorCuotaMensual = Number(infoPersona.cuotaMensual) || 0;
-    const opciones = { style: 'decimal', minimumFractionDigits: 0, maximumFractionDigits: 0 };
-    const numeroFormateado = numero.toLocaleString('es-ES', opciones) || 0;
-    const valorCuotaMensualFormateado = valorCuotaMensual.toLocaleString('es-ES', opciones) || 0;
-    const resultado = document.getElementById("resultado");
-    resultado.innerHTML = `
+        const numero = Number(infoPersona.dineroFinalAPagar) || 0;
+        const numCuotas = Number(infoPersona.cantidadCuotas) || 0;
+        const valorCuotaMensual = Number(infoPersona.cuotaMensual) || 0;
+        const opciones = { style: 'decimal', minimumFractionDigits: 0, maximumFractionDigits: 0 };
+        const numeroFormateado = numero.toLocaleString('es-ES', opciones) || 0;
+        const valorCuotaMensualFormateado = valorCuotaMensual.toLocaleString('es-ES', opciones) || 0;
+        const resultado = document.getElementById("resultado");
+        resultado.innerHTML = `
         <h1>Total a pagar: ${numeroFormateado}</h1>
         <h2>Cuotas: ${numCuotas}</h2>
         <h2>Valor Cuota mensual: ${valorCuotaMensualFormateado}</h2>
     `;
 
 
-    saveCreditoStorage(personas);
+        saveCreditoStorage(personas);
 
 
-    showCredito();
-    formulario.reset();
+        showCredito();
+        formulario.reset();
+    } else {
+        alert(" Debe ingresar datos válidos");
+    }
 };
 
 document.addEventListener("DOMContentLoaded", function () {
