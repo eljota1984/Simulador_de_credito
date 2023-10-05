@@ -83,7 +83,9 @@ const showCredito = () => {
         const numero = Number(infoPersona.dineroFinalAPagar) || 0;
         const numCuotas = Number(infoPersona.cantidadCuotas) || 0;
         const valorCuotaMensual = Number(infoPersona.cuotaMensual) || 0;
+        const dineroASolicitar = Number(infoPersona.dineroSolicitar) || 0;
         const opciones = { style: 'decimal', minimumFractionDigits: 0, maximumFractionDigits: 0 };
+        const dineroASolicitarFormateado = dineroASolicitar.toLocaleString('es-ES', opciones) || 0;
         const numeroFormateado = numero.toLocaleString('es-ES', opciones) || 0;
         const valorCuotaMensualFormateado = valorCuotaMensual.toLocaleString('es-ES', opciones) || 0;
 
@@ -92,6 +94,7 @@ const showCredito = () => {
                 <div class="card-body">
                     <strong>Nombre</strong>: ${infoPersona.nombre} <br>
                     <strong>Rut :</strong> ${infoPersona.rut} <br>
+                    <strong>Dinero solicitado: </strong> ${dineroASolicitarFormateado} <br>
                     <strong>Dinero total a pagar: </strong> ${numeroFormateado} <br>
                     <strong>${numCuotas} cuotas de : </strong> ${valorCuotaMensualFormateado}  cada una. <br>
                     <button href="#" class="btn btn-danger" id="${infoPersona.id}" name="delete">Borrar</button>
@@ -147,7 +150,7 @@ const simularCredito = () => {
         infoPersona.dineroFinalAPagar = dineroConInteres(infoPersona.dineroSolicitar, infoPersona.interes) || 0;
         infoPersona.cuotaMensual = cuotaMensual(infoPersona.dineroFinalAPagar, infoPersona.cantidadCuotas) || 0;
         let evaluacionSimular = comparaRenta(infoPersona.cuotaMensual, infoPersona.renta);
-       
+
         if (evaluacionSimular) {
 
             if (!isNaN(infoPersona.dineroFinalAPagar) || !isNaN(infoPersona.cuotaMensual)) {
@@ -158,11 +161,14 @@ const simularCredito = () => {
                 const numero = Number(infoPersona.dineroFinalAPagar) || 0;
                 const numCuotas = Number(infoPersona.cantidadCuotas) || 0;
                 const valorCuotaMensual = Number(infoPersona.cuotaMensual) || 0;
+                const dineroASolicitar = Number(infoPersona.dineroSolicitar) || 0;
                 const opciones = { style: 'decimal', minimumFractionDigits: 0, maximumFractionDigits: 0 };
+                const dineroASolicitarFormateado = dineroASolicitar.toLocaleString('es-ES', opciones) || 0;
                 const numeroFormateado = numero.toLocaleString('es-ES', opciones) || 0;
                 const valorCuotaMensualFormateado = valorCuotaMensual.toLocaleString('es-ES', opciones) || 0;
                 const resultado = document.getElementById("resultado");
                 resultado.innerHTML = `
+        <h1>Dinero solicitado : ${dineroASolicitarFormateado}</h1>        
         <h1>Total a pagar: ${numeroFormateado}</h1>
         <h2>Cuotas: ${numCuotas}</h2>
         <h2>Valor Cuota mensual: ${valorCuotaMensualFormateado}</h2>
@@ -180,8 +186,7 @@ const simularCredito = () => {
             };
         } else {
             alert("Su cuota mensual no debe superar el 40% de su renta");
-          
-        }
+        };
 
     } else {
         alert(" Debe ingresar datos válidos");
