@@ -16,7 +16,7 @@ function obtenerInteres(cuotasCliente) {
     }
 
     return interes;
-}
+};
 
 function dineroConInteres(dinero, interes) {
     const decimales = 0;
@@ -24,14 +24,14 @@ function dineroConInteres(dinero, interes) {
     let dineroConInteres = dinero * interes;
     dineroConInteres = dineroConInteres.toFixed(decimales);
     return dineroConInteres;
-}
+};
 
 function cuotaMensual(dineroFinal, cuotas) {
     const decimales = 0;
     let cuotaMensual = dineroFinal / cuotas;
     cuotaMensual = cuotaMensual.toFixed(decimales);
     return cuotaMensual;
-}
+};
 
 function obtenerCuotas(cuotas) {
     let cantidadCuotas = 6;
@@ -51,7 +51,19 @@ function obtenerCuotas(cuotas) {
     }
 
     return cantidadCuotas;
-}
+};
+
+function comparaRenta(cuotaMensual, renta) {
+    let pocenRenta = renta * 0.4;
+    let evaluacion = ""
+    if (pocenRenta >= cuotaMensual) {
+        evaluacion = true;
+    } else {
+        evaluacion = false;
+    }
+    return evaluacion;
+
+};
 
 const getRandomId = () => {
     return Math.floor(Math.random() * Date.now()).toString(16)
@@ -117,6 +129,8 @@ const simularCredito = () => {
     const cuotas = document.getElementById("cuotas").value;
     const dineroASolicitar = document.getElementById("dineroASolicitar").value;
 
+
+
     if (!isNaN(cuotas) && !isNaN(dineroASolicitar)) {
         let infoPersona = {
             id: getRandomId(),
@@ -132,35 +146,43 @@ const simularCredito = () => {
         infoPersona.interes = obtenerInteres(infoPersona.cantidadCuotas) || 0;
         infoPersona.dineroFinalAPagar = dineroConInteres(infoPersona.dineroSolicitar, infoPersona.interes) || 0;
         infoPersona.cuotaMensual = cuotaMensual(infoPersona.dineroFinalAPagar, infoPersona.cantidadCuotas) || 0;
+        let evaluacionSimular = comparaRenta(infoPersona.cuotaMensual, infoPersona.renta);
+       
+        if (evaluacionSimular) {
 
-        if (!isNaN(infoPersona.dineroFinalAPagar) || !isNaN(infoPersona.cuotaMensual)) {
+            if (!isNaN(infoPersona.dineroFinalAPagar) || !isNaN(infoPersona.cuotaMensual)) {
 
 
-            personas.push(infoPersona);
+                personas.push(infoPersona);
 
-            const numero = Number(infoPersona.dineroFinalAPagar) || 0;
-            const numCuotas = Number(infoPersona.cantidadCuotas) || 0;
-            const valorCuotaMensual = Number(infoPersona.cuotaMensual) || 0;
-            const opciones = { style: 'decimal', minimumFractionDigits: 0, maximumFractionDigits: 0 };
-            const numeroFormateado = numero.toLocaleString('es-ES', opciones) || 0;
-            const valorCuotaMensualFormateado = valorCuotaMensual.toLocaleString('es-ES', opciones) || 0;
-            const resultado = document.getElementById("resultado");
-            resultado.innerHTML = `
+                const numero = Number(infoPersona.dineroFinalAPagar) || 0;
+                const numCuotas = Number(infoPersona.cantidadCuotas) || 0;
+                const valorCuotaMensual = Number(infoPersona.cuotaMensual) || 0;
+                const opciones = { style: 'decimal', minimumFractionDigits: 0, maximumFractionDigits: 0 };
+                const numeroFormateado = numero.toLocaleString('es-ES', opciones) || 0;
+                const valorCuotaMensualFormateado = valorCuotaMensual.toLocaleString('es-ES', opciones) || 0;
+                const resultado = document.getElementById("resultado");
+                resultado.innerHTML = `
         <h1>Total a pagar: ${numeroFormateado}</h1>
         <h2>Cuotas: ${numCuotas}</h2>
         <h2>Valor Cuota mensual: ${valorCuotaMensualFormateado}</h2>
     `;
 
 
-            saveCreditoStorage(personas);
+                saveCreditoStorage(personas);
 
 
-            showCredito();
-            formulario.reset();
+                showCredito();
+                formulario.reset();
+            } else {
+                alert(" Debe ingresar datos válidos númericos válidos");
+                formulario.reset();
+            };
         } else {
-            alert(" Debe ingresar datos válidos númericos válidos");
-            formulario.reset();
+            alert("Su cuota mensual no debe superar el 40% de su renta");
+          
         }
+
     } else {
         alert(" Debe ingresar datos válidos");
         formulario.reset();
