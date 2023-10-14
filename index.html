@@ -11,6 +11,7 @@
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
         crossorigin="anonymous"></script>
     <link rel="stylesheet" href="./style.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body>
@@ -26,6 +27,7 @@
                         <span class=" input-group-text">Rut :</span>
                         <input id="rut" type="text" class="form-control miInput " aria-label="Sizing example input"
                             aria-describedby="inputGroup-sizing-default" placeholder="12345678-9">
+                            <p id="rutInput"></p>
                     </div>
                     <div class="p-3 input-group mb-3  ">
                         <span class="input-group-text" id="inputGroup-sizing-default">Nombre :</span>
@@ -50,7 +52,7 @@
                     </div>
                     <div class="p-3 input-group mb-3  ">
                         <span class="input-group-text" id="inputGroup-sizing-default">Dinero a solicitar :</span>
-                        <input id="dineroASolicitar" type="text" class="form-control miInput"
+                        <input id="dineroASolicitar" type="text" class="form-control miInput" 
                             aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"
                             placeholder="100.000 a 10.000.000">
                     </div>

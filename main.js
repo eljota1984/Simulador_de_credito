@@ -1,7 +1,8 @@
 
 const personas = [];
 
-const formulario = document.getElementById("miFormulario");
+const miFormulario = document.getElementById("miFormulario");
+
 
 function obtenerInteres(cuotasCliente) {
     let cuotas = cuotasCliente / 12;
@@ -56,6 +57,7 @@ function obtenerCuotas(cuotas) {
 function comparaRenta(cuotaMensual, renta) {
     let pocenRenta = renta * 0.4;
     let evaluacion = ""
+
     if (pocenRenta >= cuotaMensual) {
         evaluacion = true;
     } else {
@@ -63,6 +65,18 @@ function comparaRenta(cuotaMensual, renta) {
     }
     return evaluacion;
 
+};
+
+function sonNumeros(renta, cuota, dineroSolicitar) {
+    let sonNumeros = false;
+    renta = !isNaN(renta) ? renta != 0? true: false : false;
+    cuota = !isNaN(cuota) ? cuota != 0? true: false : false;
+    dineroSolicitar = !isNaN(dineroSolicitar) ? dineroSolicitar != 0? true: false : false;
+
+    if (renta && cuota && dineroSolicitar) {
+        sonNumeros = true;
+    };
+    return sonNumeros
 };
 
 const getRandomId = () => {
@@ -133,8 +147,63 @@ const simularCredito = () => {
     const dineroASolicitar = document.getElementById("dineroASolicitar").value;
 
 
+    document.getElementById('rut').style.borderColor = '';
+    document.getElementById('nombre').style.borderColor = '';
+    document.getElementById('correo').style.borderColor = '';
+    document.getElementById('renta').style.borderColor = '';
+    document.getElementById('cuotas').style.borderColor = '';
+    document.getElementById('dineroASolicitar').style.borderColor = '';
 
-    if (!isNaN(cuotas) && !isNaN(dineroASolicitar)) {
+
+    if (rut.trim() === '') {
+        document.getElementById('rut').style.borderColor = 'red';
+        // const rutInput = document.getElementById("rutInput");
+        // rutInput.innerHTML = `<br>
+        //         <span>Debe ingresar su rut de forma correcta</span> `
+
+    } else {
+        document.getElementById('nombre').style.borderColor = '';
+    }
+
+    if (nombre.trim() === '') {
+        document.getElementById('nombre').style.borderColor = 'red';
+        console.log("lhjnsdlvnlsdnv")
+
+    } else {
+        document.getElementById('nombre').style.borderColor = '';
+    }
+
+    if (correo.trim() === '') {
+        document.getElementById('correo').style.borderColor = 'red';
+
+    } else {
+        document.getElementById('nombre').style.borderColor = '';
+    }
+
+    if (renta.trim() === '') {
+        document.getElementById('renta').style.borderColor = 'red';
+
+    } else {
+        document.getElementById('renta').style.borderColor = '';
+    }
+
+    if (cuotas.trim() === '') {
+        document.getElementById('cuotas').style.borderColor = 'red';
+
+    } else {
+        document.getElementById('cuotas').style.borderColor = '';
+    }
+
+    if (dineroASolicitar.trim() === '') {
+        document.getElementById('dineroASolicitar').style.borderColor = 'red';
+
+    } else {
+        document.getElementById('dineroASolicitar').style.borderColor = '';
+    }
+
+
+
+    if (sonNumeros(renta, cuotas, dineroASolicitar)) {
         let infoPersona = {
             id: getRandomId(),
             rut: rut || "N/A",
@@ -145,56 +214,64 @@ const simularCredito = () => {
             dineroSolicitar: dineroASolicitar || "N/A",
         };
 
-
         infoPersona.interes = obtenerInteres(infoPersona.cantidadCuotas) || 0;
         infoPersona.dineroFinalAPagar = dineroConInteres(infoPersona.dineroSolicitar, infoPersona.interes) || 0;
-        infoPersona.cuotaMensual = cuotaMensual(infoPersona.dineroFinalAPagar, infoPersona.cantidadCuotas) || 0;
+        infoPersona.cuotaMensual = cuotaMensual(infoPersona.dineroFinalAPagar, infoPersona.cantidadCuotas);
         let evaluacionSimular = comparaRenta(infoPersona.cuotaMensual, infoPersona.renta);
 
         if (evaluacionSimular) {
 
-            if (!isNaN(infoPersona.dineroFinalAPagar) || !isNaN(infoPersona.cuotaMensual)) {
+            personas.push(infoPersona);
 
-
-                personas.push(infoPersona);
-
-                const numero = Number(infoPersona.dineroFinalAPagar) || 0;
-                const numCuotas = Number(infoPersona.cantidadCuotas) || 0;
-                const valorCuotaMensual = Number(infoPersona.cuotaMensual) || 0;
-                const dineroASolicitar = Number(infoPersona.dineroSolicitar) || 0;
-                const opciones = { style: 'decimal', minimumFractionDigits: 0, maximumFractionDigits: 0 };
-                const dineroASolicitarFormateado = dineroASolicitar.toLocaleString('es-ES', opciones) || 0;
-                const numeroFormateado = numero.toLocaleString('es-ES', opciones) || 0;
-                const valorCuotaMensualFormateado = valorCuotaMensual.toLocaleString('es-ES', opciones) || 0;
-                const resultado = document.getElementById("resultado");
-                resultado.innerHTML = `
+            const numero = Number(infoPersona.dineroFinalAPagar) || 0;
+            const numCuotas = Number(infoPersona.cantidadCuotas) || 0;
+            const valorCuotaMensual = Number(infoPersona.cuotaMensual) || 0;
+            const dineroASolicitar = Number(infoPersona.dineroSolicitar) || 0;
+            const opciones = { style: 'decimal', minimumFractionDigits: 0, maximumFractionDigits: 0 };
+            const dineroASolicitarFormateado = dineroASolicitar.toLocaleString('es-ES', opciones) || 0;
+            const numeroFormateado = numero.toLocaleString('es-ES', opciones) || 0;
+            const valorCuotaMensualFormateado = valorCuotaMensual.toLocaleString('es-ES', opciones) || 0;
+            const resultado = document.getElementById("resultado");
+            resultado.innerHTML = `
         <h1>Dinero solicitado : ${dineroASolicitarFormateado}</h1>        
         <h1>Total a pagar: ${numeroFormateado}</h1>
         <h2>Cuotas: ${numCuotas}</h2>
         <h2>Valor Cuota mensual: ${valorCuotaMensualFormateado}</h2>
-    `;
+    `
+            saveCreditoStorage(personas);
 
 
-                saveCreditoStorage(personas);
+            showCredito();
+            miFormulario.reset();
 
-
-                showCredito();
-                formulario.reset();
-            } else {
-                alert(" Debe ingresar datos válidos númericos válidos");
-                formulario.reset();
-            };
         } else {
-            alert("Su cuota mensual no debe superar el 40% de su renta");
+
+            Swal.fire({
+                title: 'Error!',
+                text: 'Su cuota mensual no debe superar el 40% de su renta',
+                icon: 'error',
+                confirmButtonText: 'Entendido'
+            });
         };
 
+
     } else {
-        alert(" Debe ingresar datos válidos");
-        formulario.reset();
-    }
+        
+        Swal.fire({
+            title: 'Error!',
+            text: 'Debe ingresar datos del cliente y númericos válidos',
+            icon: 'error',
+            confirmButtonText: 'Entendido'
+        });
+    };
 };
 
 document.addEventListener("DOMContentLoaded", function () {
     let boton = document.getElementById("btnPrincipal");
     boton.addEventListener("click", simularCredito);
 });
+
+
+
+
+
