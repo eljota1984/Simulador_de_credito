@@ -69,9 +69,9 @@ function comparaRenta(cuotaMensual, renta) {
 
 function sonNumeros(renta, cuota, dineroSolicitar) {
     let sonNumeros = false;
-    renta = !isNaN(renta) ? renta != 0? true: false : false;
-    cuota = !isNaN(cuota) ? cuota != 0? true: false : false;
-    dineroSolicitar = !isNaN(dineroSolicitar) ? dineroSolicitar != 0? true: false : false;
+    renta = !isNaN(renta) ? renta != 0 ? true : false : false;
+    cuota = !isNaN(cuota) ? cuota != 0 ? true : false : false;
+    dineroSolicitar = !isNaN(dineroSolicitar) ? dineroSolicitar != 0 ? true : false : false;
 
     if (renta && cuota && dineroSolicitar) {
         sonNumeros = true;
@@ -139,6 +139,7 @@ const deleteCredito = (id) => {
 };
 
 const simularCredito = () => {
+
     const rut = document.getElementById("rut").value;
     const nombre = document.getElementById("nombre").value;
     const correo = document.getElementById("correo").value;
@@ -162,12 +163,13 @@ const simularCredito = () => {
         //         <span>Debe ingresar su rut de forma correcta</span> `
 
     } else {
-        document.getElementById('nombre').style.borderColor = '';
+        document.getElementById('rut').style.borderColor = '';
+        let inspecRut = 'Escriba el rut';
     }
 
     if (nombre.trim() === '') {
         document.getElementById('nombre').style.borderColor = 'red';
-        console.log("lhjnsdlvnlsdnv")
+
 
     } else {
         document.getElementById('nombre').style.borderColor = '';
@@ -177,7 +179,7 @@ const simularCredito = () => {
         document.getElementById('correo').style.borderColor = 'red';
 
     } else {
-        document.getElementById('nombre').style.borderColor = '';
+        document.getElementById('correo').style.borderColor = '';
     }
 
     if (renta.trim() === '') {
@@ -199,23 +201,27 @@ const simularCredito = () => {
 
     } else {
         document.getElementById('dineroASolicitar').style.borderColor = '';
+
     }
 
+    // console.log(sonNumeros(renta, cuotas, dineroASolicitar)) 
+    // console.log(rut.trim() != '') 
+    // console.log(nombre.trim())
+    // console.log(correo.trim())
 
-
-    if (sonNumeros(renta, cuotas, dineroASolicitar)) {
+    if (sonNumeros(renta, cuotas, dineroASolicitar) && rut.trim() != '' && nombre.trim() != '' && correo.trim() != '') {
         let infoPersona = {
             id: getRandomId(),
-            rut: rut || "N/A",
-            nombre: nombre || "N/A",
-            correo: correo || "N/A",
-            renta: renta || "N/A",
-            cantidadCuotas: obtenerCuotas(cuotas),
-            dineroSolicitar: dineroASolicitar || "N/A",
+            rut: rut,
+            nombre: nombre,
+            correo: correo,
+            renta: renta,
+            cantidadCuotas: cuotas ? obtenerCuotas(cuotas) : cuotas,
+            dineroSolicitar: dineroASolicitar,
         };
 
-        infoPersona.interes = obtenerInteres(infoPersona.cantidadCuotas) || 0;
-        infoPersona.dineroFinalAPagar = dineroConInteres(infoPersona.dineroSolicitar, infoPersona.interes) || 0;
+        infoPersona.interes = obtenerInteres(infoPersona.cantidadCuotas);
+        infoPersona.dineroFinalAPagar = dineroConInteres(infoPersona.dineroSolicitar, infoPersona.interes);
         infoPersona.cuotaMensual = cuotaMensual(infoPersona.dineroFinalAPagar, infoPersona.cantidadCuotas);
         let evaluacionSimular = comparaRenta(infoPersona.cuotaMensual, infoPersona.renta);
 
@@ -232,6 +238,7 @@ const simularCredito = () => {
             const numeroFormateado = numero.toLocaleString('es-ES', opciones) || 0;
             const valorCuotaMensualFormateado = valorCuotaMensual.toLocaleString('es-ES', opciones) || 0;
             const resultado = document.getElementById("resultado");
+
             resultado.innerHTML = `
         <h1>Dinero solicitado : ${dineroASolicitarFormateado}</h1>        
         <h1>Total a pagar: ${numeroFormateado}</h1>
@@ -239,11 +246,8 @@ const simularCredito = () => {
         <h2>Valor Cuota mensual: ${valorCuotaMensualFormateado}</h2>
     `
             saveCreditoStorage(personas);
-
-
             showCredito();
-            miFormulario.reset();
-
+            //  miFormulario.reset();
         } else {
 
             Swal.fire({
@@ -256,10 +260,9 @@ const simularCredito = () => {
 
 
     } else {
-        
         Swal.fire({
             title: 'Error!',
-            text: 'Debe ingresar datos del cliente y númericos válidos',
+            text: 'Debe ingresar todos los datos solicitados, información del cliente y datos del crédito a solicitar',
             icon: 'error',
             confirmButtonText: 'Entendido'
         });
@@ -270,8 +273,3 @@ document.addEventListener("DOMContentLoaded", function () {
     let boton = document.getElementById("btnPrincipal");
     boton.addEventListener("click", simularCredito);
 });
-
-
-
-
-
