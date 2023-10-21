@@ -97,7 +97,7 @@ const sendEmail = async (body) => {
     };
 
     const response = await fetch("https://api.emailjs.com/api/v1.0/email/send", settings);
-    const data = await response.text(); 
+    const data = await response.text();
     return data;
 };
 
@@ -107,7 +107,6 @@ const showCredito = () => {
 
     const resultado2 = document.getElementById("resultado2");
     resultado2.innerHTML = '';
-
     personas.forEach(infoPersona => {
         const numero = Number(infoPersona.dineroFinalAPagar) || 0;
         const numCuotas = Number(infoPersona.cantidadCuotas) || 0;
@@ -157,12 +156,19 @@ const showCredito = () => {
                     'cuotaFinalMail': infoPersona.cuotaMensual,
                 }
             };
-
             sendEmail(body)
                 .then(response => console.log(response.text()))
                 .catch(error => {
                     console.log(error);
                 });
+            Toastify({
+
+                text: "Enviado",
+
+                duration: 3000
+
+            }).showToast();
+
         });
     });
 
