@@ -87,6 +87,21 @@ const saveCreditoStorage = (infoPersona) => {
     localStorage.setItem('infoPersona', JSON.stringify(infoPersona));
 };
 
+const sendEmail = async (body) => {
+    const settings = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(body)
+    };
+
+    const response = await fetch("https://api.emailjs.com/api/v1.0/email/send", settings);
+    const data = await response.text(); 
+    return data;
+};
+
+
 const showCredito = () => {
     const div = document.createElement("div");
 
@@ -112,6 +127,7 @@ const showCredito = () => {
                     <strong>Dinero total a pagar: </strong> ${numeroFormateado} <br>
                     <strong>${numCuotas} cuotas de : </strong> ${valorCuotaMensualFormateado}  cada una. <br>
                     <button href="#" class="btn btn-danger" id="${infoPersona.id}" name="delete">Borrar</button>
+                    <button href="#" class="btn btn-success" id="${infoPersona.id}" name="enviar">Enviar</button>
                 </div>
             </div>
         `;
@@ -120,6 +136,33 @@ const showCredito = () => {
         button.addEventListener("click", (e) => {
             const id = e.target.id;
             deleteCredito(id);
+        });
+    });
+    div.querySelectorAll('button[name="enviar"]').forEach(button => {
+        button.addEventListener("click", (e) => {
+            const id = e.target.id;
+            const infoPersona = personas.find(persona => persona.id === id);
+            console.log()
+
+            const body = {
+                service_id: 'service_ach3741',
+                template_id: 'template_dp296sq',
+                user_id: 'rbkG3MseTcB1Zl42T',
+                template_params: {
+                    'from_name': infoPersona.correo,
+                    'nombreMail': infoPersona.nombre,
+                    'dineroSolicitadoMail': infoPersona.dineroSolicitar,
+                    'dineroFinalMail': infoPersona.dineroFinalAPagar,
+                    'numeroCuotasFinal': infoPersona.cantidadCuotas,
+                    'cuotaFinalMail': infoPersona.cuotaMensual,
+                }
+            };
+
+            sendEmail(body)
+                .then(response => console.log(response.text()))
+                .catch(error => {
+                    console.log(error);
+                });
         });
     });
 
@@ -138,7 +181,9 @@ const deleteCredito = (id) => {
     showCredito();
 };
 
-const simularCredito = () => {
+
+
+const simularCredito = async () => {
 
     const rut = document.getElementById("rut").value;
     const nombre = document.getElementById("nombre").value;
@@ -164,8 +209,8 @@ const simularCredito = () => {
 
     } else {
         document.getElementById('rut').style.borderColor = '';
-        let inspecRut = 'Escriba el rut';
-    }
+
+    };
 
     if (nombre.trim() === '') {
         document.getElementById('nombre').style.borderColor = 'red';
@@ -247,7 +292,6 @@ const simularCredito = () => {
     `
             saveCreditoStorage(personas);
             showCredito();
-            //  miFormulario.reset();
         } else {
 
             Swal.fire({
@@ -257,8 +301,6 @@ const simularCredito = () => {
                 confirmButtonText: 'Entendido'
             });
         };
-
-
     } else {
         Swal.fire({
             title: 'Error!',
