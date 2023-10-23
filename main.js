@@ -154,6 +154,7 @@ const showCredito = () => {
                     'dineroFinalMail': infoPersona.dineroFinalAPagar,
                     'numeroCuotasFinal': infoPersona.cantidadCuotas,
                     'cuotaFinalMail': infoPersona.cuotaMensual,
+                    'to_Email': infoPersona.correo 
                 }
             };
             sendEmail(body)
@@ -162,11 +163,8 @@ const showCredito = () => {
                     console.log(error);
                 });
             Toastify({
-
                 text: "Enviado",
-
                 duration: 3000
-
             }).showToast();
 
         });
