@@ -139,10 +139,15 @@ const showCredito = () => {
     });
     div.querySelectorAll('button[name="enviar"]').forEach(button => {
         button.addEventListener("click", (e) => {
+           
             const id = e.target.id;
             const infoPersona = personas.find(persona => persona.id === id);
-            console.log()
-
+            console.log(infoPersona);
+            console.log(infoPersona.dineroSolicitar)
+            const opciones = { style: 'decimal', minimumFractionDigits: 0, maximumFractionDigits: 0 };
+            const dineroSolicitadoMail = Number(infoPersona.dineroSolicitar).toLocaleString('es-ES', opciones); 
+            const dineroFinalMail = Number(infoPersona.dineroFinalAPagar).toLocaleString('es-ES', opciones); 
+            const cuotaFinalMail =  Number(infoPersona.cuotaMensual).toLocaleString('es-ES', opciones);
             const body = {
                 service_id: 'service_ach3741',
                 template_id: 'template_dp296sq',
@@ -150,10 +155,10 @@ const showCredito = () => {
                 template_params: {
                     'from_name': infoPersona.correo,
                     'nombreMail': infoPersona.nombre,
-                    'dineroSolicitadoMail': infoPersona.dineroSolicitar,
-                    'dineroFinalMail': infoPersona.dineroFinalAPagar,
+                    'dineroSolicitadoMail': dineroSolicitadoMail,
+                    'dineroFinalMail': dineroFinalMail,
                     'numeroCuotasFinal': infoPersona.cantidadCuotas,
-                    'cuotaFinalMail': infoPersona.cuotaMensual,
+                    'cuotaFinalMail': cuotaFinalMail, 
                     'to_Email': infoPersona.correo 
                 }
             };
@@ -184,8 +189,6 @@ const deleteCredito = (id) => {
 
     showCredito();
 };
-
-
 
 const simularCredito = async () => {
 
