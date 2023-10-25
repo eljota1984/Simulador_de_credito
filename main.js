@@ -98,6 +98,14 @@ const sendEmail = async (body) => {
 
     const response = await fetch("https://api.emailjs.com/api/v1.0/email/send", settings);
     const data = await response.text();
+    console.log(response);
+    if(response.status == 200 || response.ok == true ){
+        Toastify({
+            text: "Enviado",
+            duration: 3000
+        }).showToast();
+
+    };
     return data;
 };
 
@@ -167,11 +175,6 @@ const showCredito = () => {
                 .catch(error => {
                     console.log(error);
                 });
-            Toastify({
-                text: "Enviado",
-                duration: 3000
-            }).showToast();
-
         });
     });
 
